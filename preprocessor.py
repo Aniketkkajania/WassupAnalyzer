@@ -3,13 +3,15 @@ import pandas as pd
 
 "07/11/21, 19:53 - "
 def preprocess(data):
-    pattern = '\d{1,2}/\d{1,2}/\d{2,4},\s\d{1,2}:\d{2}\s-\s'
-    messages = re.split(pattern, data)[1:]
-    dates = re.findall(pattern, data)
-
+    pattern = r'\d{2}/\d{2}/\d{2}, \d{1,2}:\d{2}\s*[ap]m - (.*)'
+    dates = re.findall(r'(\d{2}/\d{2}/\d{2}, \d{1,2}:\d{2}\s*[ap]m)', data)
+    messages = re.findall(pattern, data)
     """Creating a Panda DataFrame"""
     df = pd.DataFrame({'User Messages': messages, 'Date': dates})
-    df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%y, %H:%M - ')
+    df['Date'] = df['Date'].str.replace('\u202f', ' ')
+
+    # Parse the datetime using the updated format
+    df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%y, %I:%M %p')
 
     users = []
     messages = []

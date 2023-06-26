@@ -1,0 +1,5 @@
+matplotlib
+emoji
+seaborn
+urlextract
+wordcloud

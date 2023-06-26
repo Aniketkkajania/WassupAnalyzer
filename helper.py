@@ -17,7 +17,7 @@ def show_stats(selected_user, df):
         words.extend(message.split())
 
     # Fetch the number of media a user has sent
-    num_media_shared = df[df["Message"] == "<Media omitted>\n"].shape[0]
+    num_media_shared = df[df["Message"] == "<Media omitted>"].shape[0]
 
     # Fetch Number of Links shared
     extractor = URLExtract()
@@ -83,7 +83,7 @@ def emoji_helper(selected_user, df):
 
     emojis = []
     for message in df["Message"]:
-        emojis.extend([c for c in message if c in emoji.UNICODE_EMOJI["en"]])
+        emojis.extend([c for c in message if emoji.is_emoji(c) == True])
 
     emoji_df = pd.DataFrame(Counter(emojis).most_common(len(Counter(emojis))))
     return emoji_df
