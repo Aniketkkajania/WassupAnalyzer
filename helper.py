@@ -28,6 +28,7 @@ def show_stats(selected_user, df):
     return num_messages, len(words), num_media_shared, len(urls)
 
 
+
 def busy_user(df):
     x = df["User"].value_counts().head()
     df = round(df["User"].value_counts() / df.shape[0] * 100, 2).reset_index().rename(
@@ -127,4 +128,8 @@ def heatmap(selected_user, df):
     user_heatmap = df.pivot_table(index="day_name", columns="Period", values="Message", aggfunc="count").fillna(0)
     return user_heatmap
 
+
+def get_sentiments(selected_user, df):
+    if selected_user!= "Overall":
+        df = df[df['User'] == selected_user]
 
