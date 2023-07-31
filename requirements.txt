@@ -6,7 +6,4 @@ wordcloud
 googletrans==3.1.0a0
 transformers
 scipy
-torch
-torchvision
-torchaudio
 pattern
