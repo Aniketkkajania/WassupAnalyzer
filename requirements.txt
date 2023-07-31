@@ -4,3 +4,4 @@ seaborn
 urlextract
 wordcloud
 pattern
+nltk

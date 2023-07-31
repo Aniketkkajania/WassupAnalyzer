@@ -1,6 +1,6 @@
 import re
 import pandas as pd
-from pattern.en import sentiment
+from pattern import *
 
 "07/11/21, 19:53 - "
 def preprocess(data):
@@ -55,7 +55,7 @@ def preprocess(data):
         try:
             text = df.loc[i]['Message']
             id = df.loc[i]["ID"]
-            sent_result = sentiment(text)[0]
+            sent_result = pattern.en.sentiment(text)[0]
             if sent_result >= 0:
                 sent_result = "Positive"
             else:
