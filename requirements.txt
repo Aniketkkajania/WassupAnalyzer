@@ -1,4 +1,5 @@
 matplotlib
+pattern == 2.6
 emoji
 seaborn
 urlextract
