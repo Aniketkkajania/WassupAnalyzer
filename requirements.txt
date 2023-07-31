@@ -3,5 +3,6 @@ emoji
 seaborn
 urlextract
 wordcloud
+googletrans==3.1.0a0
 pattern
-nltk
+wheel
