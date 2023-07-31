@@ -143,7 +143,8 @@ if uploaded_file is not None:
 
         #Sentiment Analysis
         st.title("Sentiment Analysis")
-        emotion = helper.get_sentiments(selected_user, df)
-        st.header(f"Overall Sentiment: {emotion}")
-
+        pos_count, neg_count, overall = helper.get_sentiments(selected_user, df)
+        st.header(f"Positive Messages : {pos_count}")
+        st.header(f"Negative Messages: {neg_count}")
+        st.header(f"Overall Sentiment: {overall}")
         st.success("Analysis Done ✅")

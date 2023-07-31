@@ -1,7 +1,8 @@
 import re
 import pandas as pd
-from Sentiments import google_text_translate
-from Sentiments import polarity_scores_roberta
+# from Sentiments import google_text_translate
+# from Sentiments import polarity_scores_roberta
+from pattern.en import sentiment
 
 "07/11/21, 19:53 - "
 def preprocess(data):
@@ -55,20 +56,25 @@ def preprocess(data):
     for i in range(len(df)):
         try:
             text = df.loc[i]['Message']
-            ttext = google_text_translate(text, 'en')
             id = df.loc[i]["ID"]
-            roberta_result = polarity_scores_roberta(ttext)
-            res[id] = roberta_result
+            sent_result = sentiment(text)[0]
+            if sent_result >= 0:
+                sent_result = "Positive"
+            else:
+                sent_result = "Negative"
+            res[id] = sent_result
         except RuntimeError:
             print(f"Broke for id {id}")
 
-    result_df = pd.DataFrame(res).T
+    result_df = pd.DataFrame(res, index=[0]).T
     result_df = result_df.reset_index().rename(columns={'index': "ID"})
-    df = result_df.merge(df, on = "ID", how = 'left')
+    result_df = df.merge(result_df, on="ID", how='left')
 
-    #Counting the Polarity of Each Sentiments and finalyzing the emotion
-    for i in range(len(df)):
-      labels = {"Negative": df.loc[i]["Negative"], "Neutral": df.loc[i]['Neutral'], "Positive": df.loc[i]['Positive']}
-      df['Sentiment'] = max(labels)
-    return df
+    result_df = result_df.rename(columns={0: "Sentiment"})
+
+    return result_df
+
+
+
+
 

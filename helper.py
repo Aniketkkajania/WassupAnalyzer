@@ -132,5 +132,7 @@ def heatmap(selected_user, df):
 def get_sentiments(selected_user, df):
     if selected_user!= "Overall":
         df = df[df['User'] == selected_user]
-
-    return max(df.value_counts('Sentiment').index[0])
+    Overall = df['Sentiment'].value_counts(sort = True, ascending= False).keys()[0]
+    positive_count = df['Sentiment'].value_counts(sort = True, ascending= False).values[0]
+    negative_count = df['Sentiment'].value_counts(sort = True, ascending= False).values[1]
+    return positive_count, negative_count, Overall
