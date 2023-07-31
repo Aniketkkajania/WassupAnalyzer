@@ -3,7 +3,4 @@ emoji
 seaborn
 urlextract
 wordcloud
-googletrans==3.1.0a0
-transformers
-scipy
 pattern

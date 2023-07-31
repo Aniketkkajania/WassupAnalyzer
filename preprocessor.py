@@ -1,7 +1,5 @@
 import re
 import pandas as pd
-# from Sentiments import google_text_translate
-# from Sentiments import polarity_scores_roberta
 from pattern.en import sentiment
 
 "07/11/21, 19:53 - "
