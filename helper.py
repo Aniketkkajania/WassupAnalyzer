@@ -133,3 +133,4 @@ def get_sentiments(selected_user, df):
     if selected_user!= "Overall":
         df = df[df['User'] == selected_user]
 
+    return max(df.value_counts('Sentiment').index[0])

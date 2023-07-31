@@ -66,5 +66,9 @@ def preprocess(data):
     result_df = result_df.reset_index().rename(columns={'index': "ID"})
     df = result_df.merge(df, on = "ID", how = 'left')
 
+    #Counting the Polarity of Each Sentiments and finalyzing the emotion
+    for i in range(len(df)):
+      labels = {"Negative": df.loc[i]["Negative"], "Neutral": df.loc[i]['Neutral'], "Positive": df.loc[i]['Positive']}
+      df['Sentiment'] = max(labels)
     return df
 

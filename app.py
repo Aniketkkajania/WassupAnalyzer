@@ -141,4 +141,10 @@ if uploaded_file is not None:
             ax.pie(emoji_df[1].head(), labels=emoji_df[0].head(), autopct="%0.2f")
             st.pyplot(fig)
 
+        #Sentiment Analysis
+        st.title("Sentiment Analysis")
+        st.header(f"Overall Sentiment of {selected_user}")
+        emotion = helper.get_sentiments(selected_user, df)
+        st.header(emotion)
+
         st.success("Analysis Done ✅")

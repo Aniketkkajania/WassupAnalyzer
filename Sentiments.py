@@ -6,6 +6,8 @@ from scipy.special import softmax
 MODEL = f"cardiffnlp/twitter-roberta-base-sentiment"
 tokenizer = AutoTokenizer.from_pretrained(MODEL)
 model = AutoModelForSequenceClassification.from_pretrained(MODEL)
+
+
 def google_text_translate(text, dest_lang):
     translator = Translator()
     return translator.translate(text, dest = dest_lang).text
